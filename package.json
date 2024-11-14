@@ -1,6 +1,7 @@
 {
   "name": "backEndCodBurguer",
   "version": "1.0.0",
+  "type": "module",
   "description": "APICodBurguer",
   "main": "src/server.js",
   "license": "MIT",

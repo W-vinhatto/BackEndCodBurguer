@@ -1,10 +1,11 @@
 
 import express from "express"
-import routes from './routes'
+
 import {resolve} from 'node:path'
 import cors from 'cors'
 // dessa forma aplicação do database é carregado automaticamente
-import './database'
+import './database.js'
+import routes from './routes.js'
 
 class App {
     constructor(){

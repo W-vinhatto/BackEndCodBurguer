@@ -1,7 +1,9 @@
 import * as Yup from "yup";
-import User from "../models/User";
+
 import jwt from 'jsonwebtoken'
-import authConfig from '../../config/auth'
+
+import authConfig from '../../config/auth.js'
+import User from "../models/User.js";
 
 // determinando como front deve enviar dados de logout para api
 class SessionController {

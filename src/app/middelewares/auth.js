@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import authConfig from "../../config/auth";
+import authConfig from "../../config/auth.js";
 
 // fazendo pré definição de onde middllewares irá receber token
 function authMiddllewares(request, response, next) {

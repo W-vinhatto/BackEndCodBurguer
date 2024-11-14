@@ -1,12 +1,12 @@
 import { Router } from "express";
 import multer from "multer";
-import multerConfig from "./config/multer";
-import authMiddllewares from "./app/middelewares/auth";
+import multerConfig from "./config/multer.js";
+import authMiddllewares from "./app/middelewares/auth.js";
 
-import UserController from "./app/controller/UserController";
-import SessionController from "./app/controller/SessionController";
-import productController from "./app/controller/productController";
-import CategoryController from "./app/controller/CategoryController";
+import UserController from "./app/controller/UserController.js";
+import SessionController from "./app/controller/SessionController.js";
+import productController from "./app/controller/ProductController.js";
+import CategoryController from "./app/controller/CategoryController.js";
 import OrderController from "./app/controller/OrderController.js";
 import CreatePaymentIntentController from "./app/controller/stripe/CreatePaymentIntentController.js";
 
