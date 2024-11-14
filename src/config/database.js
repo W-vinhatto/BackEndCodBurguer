@@ -2,7 +2,7 @@
 
 module.exports = {
     dialect: 'postgres',
-    url: 'postgresql://postgres:VVvqUdPosQsryZWSpGouRMooVnspMCha@junction.proxy.rlwy.net:19076/railway',
+    url: 'postgresql://postgres:hlqoWkxDeBIXBWavXWkSIcRaVrDkloCd@autorack.proxy.rlwy.net:42445/railway',
     /**
      * trocado config após deploy com railway
         host: 'localhost',
