@@ -25,7 +25,7 @@
   },
   "scripts": {
     "sequelize": "cross-env NODE_OPTIONS='--require sucrase/register' npx sequelize-cli",
-    "dev": "nodemon"
+   "dev": "nodemon --exec sucrase-node src/server.js --require sucrase/register"
   },
   "devDependencies": {
     "@eslint/js": "^9.7.0",

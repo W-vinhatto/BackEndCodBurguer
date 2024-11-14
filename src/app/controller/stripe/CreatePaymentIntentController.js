@@ -1,20 +1,16 @@
-import * as Yup from "yup";
-//import Stripe from "stripe";
-//const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-//import 'dotenv/config'
-const stripe = require("stripe")('sk_test_51Q5Ci5FbYEC7Vq59ciApq0pLBtI6RFOqujQUlKPgDDbtgA8ziVI7c5f2IY5yNj7Dqrcz4B1kNRbLhAbDiEsFyxce00nnRu0V00');
+import * as Yup from 'yup';  // Importando Yup corretamente
+import Stripe from 'stripe';  // Usando import para Stripe
 
+// Inicializando o Stripe com a chave secreta
+const stripe = new Stripe('sk_test_51Q5Ci5FbYEC7Vq59ciApq0pLBtI6RFOqujQUlKPgDDbtgA8ziVI7c5f2IY5yNj7Dqrcz4B1kNRbLhAbDiEsFyxce00nnRu0V00');
 
-
-
-const calculateOrderAmout = (items) => {
+const calculateOrderAmount = (items) => {
     const total = items.reduce((acc, current) => {
-        return current.price * current.quantity + acc
-    }, 0)
+        return current.price * current.quantity + acc;
+    }, 0);
 
-    return total
-}
-
+    return total;
+};
 
 class CreatePaymentIntent {
     async store(request, response) {
@@ -26,7 +22,6 @@ class CreatePaymentIntent {
                         id: Yup.number().required(),
                         quantity: Yup.number().required(),
                         price: Yup.number().required(),
-
                     })
                 ),
         });
@@ -37,18 +32,20 @@ class CreatePaymentIntent {
             return response.status(400).json({ error: err.errors });
         }
 
-        const { products } = request.body
+        const { products } = request.body;
 
-        const amount = calculateOrderAmout(products)
+        const amount = calculateOrderAmount(products);
 
+        // Criando o PaymentIntent com o Stripe
         const paymentIntent = await stripe.paymentIntents.create({
             amount,
-            currency: "brl",
+            currency: 'brl',
             automatic_payment_methods: {
                 enabled: true,
             },
         });
 
+        // Respondendo com o clientSecret e o link para revisar o pagamento no dashboard do Stripe
         response.json({
             clientSecret: paymentIntent.client_secret,
             dpmCheckerLink: `https://dashboard.stripe.com/settings/payment_methods/review?transaction_id=${paymentIntent.id}`,

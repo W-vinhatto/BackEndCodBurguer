@@ -1,32 +1,43 @@
+// src/app.js
 
-import express from "express"
+import express from 'express';
+import { resolve } from 'node:path';
+import cors from 'cors';
 
-import {resolve} from 'node:path'
-import cors from 'cors'
-// dessa forma aplicação do database é carregado automaticamente
-import './database.js'
-import routes from './routes.js'
+// Importação automática do arquivo de configuração do banco de dados
+import './database/index.js'; // Certifique-se de incluir a extensão .js
+
+// Importando as rotas
+import routes from './routes.js';
+
+// Para compatibilidade com ES Modules, substituindo __dirname
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Obtendo o __dirname para compatibilidade com ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 class App {
-    constructor(){
-        this.app = express()
-        this.app.use(cors())
+  constructor() {
+    this.app = express(); // Criação da instância do Express
+    this.app.use(cors()); // Habilitando CORS
 
-        this.middlewares()
-        this.routes()
-    }
+    this.middlewares(); // Configurando middlewares
+    this.routes(); // Configurando as rotas
+  }
 
-    middlewares(){
-        this.app.use(express.json())
-        this.app.use('/products-file', express.static(resolve(__dirname, '..', 'uploads')))
-        this.app.use('/category-file', express.static(resolve(__dirname, '..', 'uploads')))
-    }
+  middlewares() {
+    // Configuração para interpretar JSON e fornecer arquivos estáticos
+    this.app.use(express.json());
+    this.app.use('/products-file', express.static(resolve(__dirname, '..', 'uploads')));
+    this.app.use('/category-file', express.static(resolve(__dirname, '..', 'uploads')));
+  }
 
-    routes(){
-        this.app.use(routes)
-    }
+  routes() {
+    this.app.use(routes); // Definindo as rotas
+  }
 }
 
-// forma de deixar informação disponivel em toda aplicação, aplicação é app
-
-export default new App().app
+// Exportando a instância da aplicação para uso em outros módulos
+export default new App().app;
