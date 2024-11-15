@@ -25,7 +25,6 @@ class App {
     const corsOptions = {
       origin: 'https://olimpos.netlify.app', // Permite apenas este domínio
       methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permite os métodos necessários
-      allowedHeaders: ['Content-Type'], // Permite apenas o cabeçalho Content-Type (ou adicione outros, se necessário)
     };
 
     this.app.use(cors(corsOptions)); // Habilitando CORS com as opções configuradas
