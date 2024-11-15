@@ -12,7 +12,7 @@ class Products extends Model {
         url: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3001/products-file/${this.path}`;
+            return `https://innovative-illumination-production-0226.up.railway.app/products-file/${this.path}`;
           },
         },
       },
